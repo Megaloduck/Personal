@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Personal.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
+    xmlns:pages="clr-namespace:Personal.Pages"
+    xmlns:mainmenu="clr-namespace:Personal.Pages.MainMenu"
+    xmlns:system="clr-namespace:Personal.Pages.System"
+    xmlns:tools="clr-namespace:Personal.Pages.Tools"
+    Shell.FlyoutBehavior="Locked"
+    Shell.NavBarIsVisible="False"
+    Title="Personal">
+
+    <!-- LOGIN PAGE -->
+    <ShellContent Route="LoginPage"
+               ContentTemplate="{DataTemplate pages:LoginPage}" />
+
+    <!-- CEO -->
+    <ShellContent Route="SidebarPage"
+               ContentTemplate="{DataTemplate Pages:SidebarPage}" />
+
+   
+</Shell>
