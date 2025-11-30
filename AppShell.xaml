@@ -8,7 +8,7 @@
     xmlns:mainmenu="clr-namespace:Personal.Pages.MainMenu"
     xmlns:system="clr-namespace:Personal.Pages.System"
     xmlns:tools="clr-namespace:Personal.Pages.Tools"
-    Shell.FlyoutBehavior="Locked"
+    Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False"
     Title="Personal">
 
