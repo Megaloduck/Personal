@@ -19,7 +19,8 @@ namespace Personal.PageModels
         }
         private async void OnLogin()
         {
-            await Shell.Current.GoToAsync("SidebarPage");
+            await Shell.Current.GoToAsync("///SidebarPage");
+
         }
     }
 }

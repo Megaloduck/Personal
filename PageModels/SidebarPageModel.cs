@@ -1,27 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
-using Personal.Pages;
 using Personal.Pages.MainMenu;
 using Personal.Pages.Tools;
 using Personal.Pages.System;
+using Personal.Services;
 
 namespace Personal.PageModels
 {
     public class SidebarPageModel : BasePageModel
     {
+        private readonly ThemeService _themeService;
+
+        // Used by SidebarPage.xaml.cs to navigate content
         public Action<Page> NavigateAction { get; set; }
-        public SidebarPageModel() 
+
+        public SidebarPageModel()
         {
-            BuildCommands();
+            _themeService = ThemeService.Instance;
+
+            BuildNavigationCommands();
+            HookThemeUpdates();
         }
 
-        // Main Menu Commands
+        // -------------------------------
+        // THEME BINDING
+        // -------------------------------
+        public bool IsDarkMode
+        {
+            get => _themeService.IsDarkMode;
+            set
+            {
+                if (_themeService.IsDarkMode != value)
+                {
+                    _themeService.IsDarkMode = value;   // ThemeService applies the actual theme
+                    OnPropertyChanged();                // Update UI binding
+                }
+            }
+        }
+
+        private void HookThemeUpdates()
+        {
+            _themeService.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(ThemeService.IsDarkMode))
+                    OnPropertyChanged(nameof(IsDarkMode));
+            };
+        }
+
+        // -------------------------------
+        // COMMANDS
+        // -------------------------------
         public ICommand NavigateToDashboardCommand { get; private set; }
         public ICommand NavigateToOverviewCommand { get; private set; }
 
-        // Tools Commands
         public ICommand NavigateToTools1Command { get; private set; }
         public ICommand NavigateToTools2Command { get; private set; }
         public ICommand NavigateToTools3Command { get; private set; }
@@ -30,11 +61,13 @@ namespace Personal.PageModels
         public ICommand NavigateToTools6Command { get; private set; }
         public ICommand NavigateToTools7Command { get; private set; }
 
-        // System Commands
         public ICommand NavigateToUsersCommand { get; private set; }
         public ICommand NavigateToSettingsCommand { get; private set; }
 
-        private void BuildCommands()
+        // -------------------------------
+        // BUILD COMMANDS
+        // -------------------------------
+        private void BuildNavigationCommands()
         {
             // Main Menu
             NavigateToDashboardCommand = new Command(() => NavigateAction?.Invoke(new DashboardPage()));
