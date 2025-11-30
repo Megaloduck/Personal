@@ -16,9 +16,9 @@
     <ShellContent Route="LoginPage"
                ContentTemplate="{DataTemplate pages:LoginPage}" />
 
-    <!-- CEO -->
+    <!-- SIDEBAR -->
     <ShellContent Route="SidebarPage"
-               ContentTemplate="{DataTemplate Pages:SidebarPage}" />
+               ContentTemplate="{DataTemplate pages:SidebarPage}" />
 
    
 </Shell>
