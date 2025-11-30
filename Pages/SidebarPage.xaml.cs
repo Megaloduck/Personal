@@ -18,6 +18,10 @@ public partial class SidebarPage : ContentPage
 
     private void NavigateToPage(Page page)
     {
-        ContentArea.Content = page;
+        // Cast to ContentPage and extract the Content
+        if (page is ContentPage contentPage)
+        {
+            ContentArea.Content = contentPage.Content;
+        }
     }
 }

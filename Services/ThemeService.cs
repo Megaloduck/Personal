@@ -52,8 +52,18 @@ namespace Personal.Services
         private void ApplyTheme()
         {
             var mergedDictionaries = Application.Current.Resources.MergedDictionaries;
-            mergedDictionaries.Clear();
 
+            // Remove only theme dictionaries (Light/Dark), keep other resource dictionaries
+            var themesToRemove = mergedDictionaries
+                .Where(d => d is LightTheme || d is DarkTheme)
+                .ToList();
+
+            foreach (var theme in themesToRemove)
+            {
+                mergedDictionaries.Remove(theme);
+            }
+
+            // Add the new theme
             if (_isDarkMode)
             {
                 mergedDictionaries.Add(new DarkTheme());
